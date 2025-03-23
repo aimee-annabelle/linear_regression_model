@@ -4,7 +4,7 @@ import '../providers/form_provider.dart';
 import '../theme/app_theme.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  const ResultScreen({super.key, Map<String, String>? inputData, double? predictedScore});
 
   @override
   Widget build(BuildContext context) {
