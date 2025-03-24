@@ -178,6 +178,11 @@ def predict(student_data: StudentData):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
 
+# default endpoint
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Student Performance Prediction API! navigate to /docs to use the API"}
+
 # Health check endpoint
 @app.get("/health")
 def health_check():
