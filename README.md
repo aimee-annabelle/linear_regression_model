@@ -15,7 +15,6 @@ To transform education in Rwanda through research, innovation, and community eng
 1. Clone the repository locally in any folder
 ```
 git clone https://github.com/aimee-annabelle/linear_regression_model.git
-cd linear_regression_model
 ```
 2. Navigate to the project directory
 
