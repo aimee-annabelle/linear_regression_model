@@ -104,8 +104,9 @@ class PredictionResponse(BaseModel):
 def load_model():
     try:
         # Try to load the model from the expected path
+        current_dir = os.getcwd()
         model_path = os.environ.get('MODEL_PATH', 
-                     os.path.join('summative/linear_regression/models', 'best_student_performance_model.pkl'))
+                     os.path.join(current_dir, 'summative/linear_regression/models', 'best_student_performance_model.pkl'))
         model = joblib.load(model_path)
         print(f"Model loaded successfully from {model_path}!")
         return model
