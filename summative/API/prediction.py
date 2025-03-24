@@ -6,6 +6,7 @@ import pandas as pd
 import uvicorn
 import os
 from typing import Optional, Literal
+import numpy as np
 
 # Initialize FastAPI app with metadata
 app = FastAPI(
@@ -105,11 +106,26 @@ def load_model():
     try:
         # Try to load the model from the expected path
         current_dir = os.getcwd()
-        model_path = os.environ.get('MODEL_PATH', 
-                     os.path.join(current_dir, 'summative/linear_regression/models', 'best_student_performance_model.pkl'))
-        model = joblib.load(model_path)
-        print(f"Model loaded successfully from {model_path}!")
-        return model
+        print(f"Current working directory: {current_dir}")
+        
+        # Look for model in multiple potential locations
+        potential_paths = [
+            os.environ.get('MODEL_PATH'),
+            os.path.join(current_dir, 'models', 'best_student_performance_model.pkl'),
+            os.path.join(current_dir, 'summative/linear_regression/models', 'best_student_performance_model.pkl'),
+            os.path.join(current_dir, 'linear_regression/models', 'best_student_performance_model.pkl')
+        ]
+        
+        # Try each path until we find the model
+        for path in potential_paths:
+            if path and os.path.exists(path):
+                print(f"Attempting to load model from: {path}")
+                model = joblib.load(path)
+                print(f"Model loaded successfully from {path}!")
+                return model
+                
+        # If we get here, we couldn't find the model
+        raise FileNotFoundError("Model file not found in any of the expected locations")
     except Exception as e:
         print(f"Error loading model: {e}")
         # Return None if model could not be loaded
