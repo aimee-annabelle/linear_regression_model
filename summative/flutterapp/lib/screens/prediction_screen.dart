@@ -87,7 +87,8 @@ class _PredictionScreenState extends State<PredictionScreen> {
 
         // Make API call
         final response = await http.post(
-          Uri.parse('http://127.0.0.1:8000/predict'),
+          Uri.parse(
+              'https://linear-regression-model-k1rp.onrender.com/predict'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(requestData),
         );

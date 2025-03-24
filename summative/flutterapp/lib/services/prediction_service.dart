@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/prediction_data.dart';
 
 class PredictionService {
-  static const String apiUrl = 'http://127.0.0.1:8000/predict';
+  static const String apiUrl = 'https://linear-regression-model-k1rp.onrender.com/predict';
 
   static Future<double> getPrediction(PredictionData data) async {
     try {
